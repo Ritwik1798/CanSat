@@ -34,6 +34,7 @@ const int format_pin = PA0;
 const int tmp36 = 15;
 const int rpm = 12;
 const int servo = 8;
+
 const uint16_t Address_pc = 0x10;
 const uint16_t Address_mt_hour = 0x11;
 const uint16_t Address_mt_minute = 0x12;
@@ -47,18 +48,19 @@ uint16 Minute_start = 0;
 uint16 Second_start = 0;
 uint16 packet_count = 0;
 uint16_t Address_global;
-int status;
-int pos =0;
 uint16 EEPROM_status;
 uint16 Data_global;
 uint16_t timer = millis();
+
 float temperature;
 float pressure;
 float altitude;
 float countrpm;
 float SLpressure_mB;
-int ELEVATION = 300;  //PUT HERE THE ELEVATION OF YOUR LOCATION IN METERS
-char s[128]; // for sprintf
+int ELEVATION = 300; 
+int status;
+int pos =0;
+char s[128]; 
 time_t compensated_time, stored_time;
 tm_t time_struct;
 uint8_t dateread[11];
@@ -79,12 +81,14 @@ void DisplayConfig();
 void imu_data();
 void gps_data();
 void store_data_imu();
+
 uint16 flash_retrieve(uint16_t Address, uint16_t Data);
 void flash_store(uint16_t Address, uint16_t Data);
 void flash_var_init();
 uint8_t str2month(const char * d);
-void ParseBuildTimestamp(tm_t & mt);      // get the Unix epoch Time counted from 00:00:00 1 Jan 1970
+void ParseBuildTimestamp(tm_t & mt);     
 void mission_time();
+
 void setup()
 {
   pinMode(format_pin,INPUT_PULLUP);
@@ -135,6 +139,7 @@ void ext_temp(){
   Serial.print(etemp,2);
   Serial.println("degC");
 }
+
 void blade_rpm(){
   int count = 0;
   boolean countFlag = LOW;
@@ -227,6 +232,7 @@ void imu_data() {
   else
     Serial.println("error opening datalog.txt");   
 }
+
 void gps_data() {
   char c = GPS.read();
   if (GPSECHO)
